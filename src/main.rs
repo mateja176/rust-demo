@@ -1,5 +1,7 @@
 mod print;
 
+use print::print::greet;
+
 fn main() {
-    print::greet("Rust");
+    greet("Rust");
 }
