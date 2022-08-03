@@ -1,5 +1,5 @@
-pub mod print {
-    pub fn greet(name: &str) {
+pub mod greet {
+    pub fn en(name: &str) {
         println!("Hello {}!", (name))
     }
 }
