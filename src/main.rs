@@ -1,3 +1,4 @@
+use std::rc::Rc;
 mod print;
 
 use print::greet;
@@ -13,6 +14,30 @@ fn main() {
     use List::{Cons, Nil};
     let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
     println!("BoxList: {:?}", list);
+
+    #[derive(Debug)]
+    enum RcList {
+        Cons(i32, Rc<RcList>),
+        Nil,
+    }
+    let rc_list = RcList::Cons(
+        1,
+        Rc::new(RcList::Cons(
+            2,
+            Rc::new(RcList::Cons(3, Rc::new(RcList::Nil))),
+        )),
+    );
+    println!("RcList: {:?}", rc_list);
+
+    let a = Rc::new(RcList::Cons(1, Rc::new(RcList::Nil)));
+    println!("RcList count a: {}", Rc::strong_count(&a));
+    let b = RcList::Cons(2, Rc::clone(&a));
+    println!("RcList count b: {}", Rc::strong_count(&a));
+    {
+        let c = RcList::Cons(3, Rc::clone(&a));
+        println!("RcList count c: {}", Rc::strong_count(&a));
+    }
+    println!("RcList count: {}", Rc::strong_count(&a));
 
     let mut vector = vec![1, 2, 3];
     println!("Vec last: {:?}", vector.last());
