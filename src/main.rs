@@ -67,4 +67,18 @@ fn main() {
         z = longest(x, y);
     }
     println!("Lifetime longest: {}", z);
+
+    struct Point {
+        x: f64,
+        y: f64,
+    }
+
+    impl Point {
+        fn print(&self) -> String {
+            format!("x: {}, y: {}", self.x, self.y)
+        }
+    }
+
+    let point = Point { x: 1.0, y: 2.0 };
+    println!("Trait Point::format: {}", point.print());
 }
