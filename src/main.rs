@@ -50,4 +50,21 @@ fn main() {
         .iter()
         .fold(0, |acc, element| acc + i32::pow(2, *element));
     println!("Vec sum of powers of 2: {}", product);
+
+    // 'a refers to the smallest lifetime
+    fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+        if x.len() >= y.len() {
+            x
+        } else {
+            y
+        }
+    }
+
+    let x = "x";
+    let z: &str;
+    {
+        let y = "yz";
+        z = longest(x, y);
+    }
+    println!("Lifetime longest: {}", z);
 }
