@@ -81,4 +81,22 @@ fn main() {
 
     let point = Point { x: 1.0, y: 2.0 };
     println!("Trait Point::format: {}", point.print());
+
+    fn collatz(i: i128) -> i128 {
+        if i % 2 == 0 {
+            i / 2
+        } else {
+            (i * 3) + 1
+        }
+    }
+    fn collatz_n(collatz_fn: fn(i128) -> i128, n: i128) -> i128 {
+        match n {
+            1 => n,
+            _ => {
+                println!("collatz: {}", n);
+                collatz_n(collatz_fn, collatz_fn(n))
+            }
+        }
+    }
+    collatz_n(collatz, 3);
 }
