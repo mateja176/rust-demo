@@ -115,4 +115,9 @@ fn main() {
     let pow_2 = pow_n(2);
     println!("Curry 1¹: {}", pow_1(2));
     println!("Curry 2²: {}", pow_2(2));
+
+    let int = 1;
+    let int_ref = &int;
+    let int_deref = *int_ref;
+    println!("Deref integer {}", int_deref);
 }
