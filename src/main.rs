@@ -103,4 +103,10 @@ fn main() {
         }
     }
     collatz_n(collatz, 3);
+
+    fn pow_n(n: i128) -> impl Fn(u32) -> i128 {
+        move |m: u32| -> i128 { i128::pow(n, m) }
+    }
+    let pow_2 = pow_n(2);
+    println!("2²: {}", pow_2(2));
 }
