@@ -104,9 +104,15 @@ fn main() {
     }
     collatz_n(collatz, 3);
 
-    fn pow_n(n: i128) -> impl Fn(u32) -> i128 {
-        move |m: u32| -> i128 { i128::pow(n, m) }
+    fn pow_n(n: i128) -> Box<dyn Fn(u32) -> i128> {
+        if n == 1 {
+            Box::new(|_: u32| 1)
+        } else {
+            Box::new(move |m: u32| -> i128 { i128::pow(n, m) })
+        }
     }
+    let pow_1 = pow_n(1);
     let pow_2 = pow_n(2);
-    println!("2²: {}", pow_2(2));
+    println!("Curry 1¹: {}", pow_1(2));
+    println!("Curry 2²: {}", pow_2(2));
 }
