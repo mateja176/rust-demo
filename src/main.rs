@@ -89,12 +89,16 @@ fn main() {
             (i * 3) + 1
         }
     }
-    fn collatz_n(collatz_fn: fn(i128) -> i128, n: i128) -> i128 {
+    fn collatz_n<F>(collatz_fn: F, n: i128) -> i128
+    where
+        F: Fn(i128) -> i128,
+    {
         match n {
             1 => n,
             _ => {
-                println!("collatz: {}", n);
-                collatz_n(collatz_fn, collatz_fn(n))
+                println!("Callback collatz: {}", n);
+                let m = collatz_fn(n);
+                collatz_n(collatz_fn, m)
             }
         }
     }
